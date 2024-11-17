@@ -12,8 +12,9 @@ Ensure you have the following installed:
 ## **2. Clone the Repository**
 
 1. **Copy the Repository Link**:
-   - Navigate to the repository page (e.g., on GitHub).
+   - Navigate to the repository page.
    - Click the **Code** button and copy the HTTPS or SSH link.
+   - Or use the link provided: https://github.com/ST10172466/Prog7312POE.git
 
 2. **Open Visual Studio**:
    - Launch Visual Studio.
@@ -62,17 +63,7 @@ Ensure you have the following installed:
 
 ---
 
-## **6. Configure Environment Variables (if applicable)**
-
-1. **Locate the `.env` File**:
-   - If the application uses a `.env` file or appsettings.json, configure it by adding any required values.
-
-2. **Modify Configuration**:
-   - Open `appsettings.json` or use the **Settings** in Visual Studio to add necessary configurations.
-
----
-
-## **7. Troubleshooting**
+## **6. Troubleshooting**
 
 1. **Build Errors**:
    - Ensure all dependencies are installed by restoring NuGet packages.
@@ -85,18 +76,6 @@ Ensure you have the following installed:
    - If the repository fails to clone, confirm that Git is installed and configured on your system.
 
 ---
-
-## **8. Additional Tips**
-
-- **Debugging**:
-  Use breakpoints and the Debugger in Visual Studio to inspect and test your code.
-
-- **Update Dependencies**:
-  Periodically update NuGet packages to ensure compatibility:
-  ```bash
-  dotnet add package <PackageName>
-
-
 
 ## Running the Application
 Upon launching the application you will be greeted with 3 options.

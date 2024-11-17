@@ -1,5 +1,5 @@
 # Welcome to the Municipal App V3
-## Getting Started
+# Getting Started
 ## **1. Prerequisites**
 
 Ensure you have the following installed:
@@ -77,10 +77,11 @@ Ensure you have the following installed:
 
 ---
 
-## Running the Application
+# Using the Application
 Upon launching the application you will be greeted with 3 options.
 
-### Report Issues
+## **1. Report Issues**
+
 This button takes you to a new page where you can input details about the issue you'd like to report.
 There are 5 fields you must fill in:
 -   Issue Name
@@ -92,21 +93,65 @@ There are 5 fields you must fill in:
 Once all the fields have been filled in, the report can be submitted by clicking the "Submit" button, and you can either submit another report or view all the reports you've submitted.
 If you choose to view the reports you've submitted, you can click the "View Reports" button which will take you to the appropriate page.
 
-### Report View
+---
+
+## **2. Report View**
+
 You can select an entry using it's name and all the details about it will be displayed.
 
-### Local Events and Announcements
+---
+
+## **3. Local Events and Announcements**
+
 This button takes you to a new page where you can select and view various events.
 You can also:
 - Filter Events: Filter events based on category and date range.
 - Sort Events: Sort events by title, category, or date.
 - View Event: View detailed information about a selected event.
 
-### Services
+---
+
+## **4. Services**
+
 This button takes you to a new page where you can view all the service requests in your area.
 You can also:
 - Search Requests: Search requests based on the title.
-  - 
 - Filter Requests: Filter requests based on status and date range.
 - Sort Requests: Sort requests by title, status, date, or priority.
 - View Requests: View detailed information about a selected request.
+
+### **4.1. Data Structures Used**
+
+**4.1.1. Binary Tree**
+- A **binary tree** is a tree that has at most two children for any of its nodes. https://www.geeksforgeeks.org/applications-advantages-and-disadvantages-of-binary-tree/
+- A binary tree is used to store all Service Request data.
+
+- **Purpose**:
+  - Used to store all **Service Request data** in a structured format.
+  - Maintains the relationships between parent and child nodes for efficient traversal.
+
+- **Advantages**:
+  - **Hierarchical Organization**: Represents the service requests logically, making it easy to navigate through different layers of data.
+  - **Traversal Flexibility**: Supports multiple traversal techniques (in-order, pre-order, post-order) for various use cases like displaying all requests in a specific order.
+  - **Efficient Data Insertion**: Data can be quickly added without disrupting the overall structure.
+
+
+**4.1.2 Binary Search Tree (BST)**
+- A BST is used to search, retrieve, and filter all Service Requests.
+- Advantages:
+
+**4.1.2 Graph**
+- A graph is used manage complex relationships between the Service Requests, specifically the dependencies of each request.
+- Advantages:
+
+**4.1.2 Minimum Spanning Tree (MST)**
+- An MST is used to prevent recursion errors in the graph when adding dependencies.
+- Advantages:
+
+**4.1.2 Heap**
+- A heap is used to determine the most urgent event by checking which events has the most dependencies.
+- Advantages:
+
+---
+
+# **Recommended Technologies**

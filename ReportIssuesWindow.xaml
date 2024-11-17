@@ -1,0 +1,214 @@
+﻿<Window x:Class="POEPart1.ReportIssuesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POEPart1"
+        mc:Ignorable="d"
+        Title="ReportIssuesWindow" Height="1080" Width="1920" WindowState="Maximized">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header  -->
+        <Grid Grid.Row="0" Height="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Source="/Resources/coct_logo.png" Grid.Column="1" Stretch="Uniform" Margin="10" MinWidth="150"/>
+
+            <Button Grid.Column="3" Height="50" Width="100">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#2EA9D3" Cursor="Hand">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Menu" Foreground="White" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <Image Source="/Resources/menu_burger.png" Width="30" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Below Header -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="5">
+                <Rectangle Fill="DarkGray" Height="1" VerticalAlignment="Top" />
+            </Border>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBlock Text="Home" FontSize="14" Foreground="#2EA9D3" FontWeight="Bold" Margin="10"/>
+                <Image Source="/Resources/right_arrow_flat_ic.png" Width="15" Height="15" />
+                <TextBlock Text="Report Issues" FontSize="14" Foreground="#2EA9D3" Margin="10" />
+            </StackPanel>
+        </Grid>
+
+        <Image Source="/Resources/group_sunset.jpg" Grid.Row="2" Stretch="UniformToFill" VerticalAlignment="Center" />
+
+        <!-- Name -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name:" Margin="20" FontSize="14" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Column="1" Margin="0,20,0,20" >
+                <TextBox Name="txtName" Width="200" Height="Auto" HorizontalAlignment="Left" Padding="5"/>
+                <TextBlock Text="Enter the name of the issue to better identify it later!" 
+                           Margin="10" FontSize="14" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Location -->
+            <TextBlock Text="Location:" Margin="20" FontSize="14" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Column="1" Margin="0,20,0,20" >
+                <TextBox Name="txtLocation" Width="400" Height="Auto" HorizontalAlignment="Left" Padding="5"/>
+                <TextBlock Text="Enter the specific address or landmark to help us locate the issue. The more accurate, the faster we can assist!" 
+                           Margin="10" FontSize="14" TextWrapping="Wrap" MaxWidth="400" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+            <!-- Category -->
+            <TextBlock Text="Category:" Margin="20" FontSize="14" Grid.Column="2" HorizontalAlignment="Right"/>
+            <StackPanel Grid.Column="3" Margin="0,20,0,0" >
+                <ComboBox Name="cmbCategory" Width="200" Height="20" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="-- Select Category --"/>
+                    <ComboBoxItem Content="Roads"/>
+                    <ComboBoxItem Content="Utilities"/>
+                    <ComboBoxItem Content="Sanitation"/>
+                    <ComboBoxItem Content="Health"/>
+                    <ComboBoxItem Content="Other"/>
+                </ComboBox>
+                <TextBlock Text="Select the type of issue you are reporting to ensure it reaches the right department." 
+                           Margin="10" FontSize="14" TextWrapping="Wrap" MaxWidth="300" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Description -->
+            <TextBlock Text="Description:" Margin="20" FontSize="14" HorizontalAlignment="Right"/>
+
+            <StackPanel Grid.Column="1" Margin="0,20,0,20" >
+                <RichTextBox Name="rtbDescription" Height="Auto" HorizontalAlignment="Left" Padding="5" MaxWidth="600" />
+                <TextBlock Text="Provide details about the issue to help us understand the problem. The more information, the better!" 
+                       Margin="10" FontSize="14" TextWrapping="Wrap" MaxWidth="400" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+            <!-- Media -->
+            <StackPanel Grid.Column="3">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                    <Button Content="Attach Media" Name="btnAttachMedia" Margin="10" Foreground="White" 
+                            FontSize="16" FontWeight="SemiBold" Click="btnAttachMedia_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="#2EA9D3" Cursor="Hand" Padding="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <CheckBox Name="chkbxAttached" IsEnabled="False" Margin="10" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <TextBlock Text="Any extra documents you can provide help us to understand the issue!" 
+                           Margin="10" FontSize="14" TextWrapping="Wrap" MaxWidth="300" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Mircocopy Label -->
+        <TextBlock Text="You're helping to improve our community!" HorizontalAlignment="Center" 
+                   Grid.Row="6" Margin="10" FontSize="14"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Center">
+            <!-- Back to Menu Button -->
+            <Button Name="btnBackToMenu" Foreground="White"
+                    FontSize="16" FontWeight="SemiBold" Click="btnBackToMenu_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#2EA9D3" Cursor="Hand" Padding="10" Margin="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="/Resources/right_arrow.png"  Width="15" VerticalAlignment="Center" Margin="5" >
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="-1" />
+                        </Image.RenderTransform>
+                        <Image.RenderTransformOrigin>
+                            <Point X="0.5" Y="0.5" />
+                        </Image.RenderTransformOrigin>
+                    </Image>
+                    <TextBlock Text="Back to Main Menu" Foreground="White" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Submit Button -->
+            <Button Content="Submit" Name="btnSubmit" Foreground="White" 
+                    FontSize="16" FontWeight="SemiBold" Click="btnSubmit_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#2EA9D3" Cursor="Hand" Padding="10" Margin="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- View Reports Button -->
+            <Button Name="btnViewReport" Foreground="White"
+        FontSize="16" FontWeight="SemiBold" Click="btnViewReport_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#2EA9D3" Cursor="Hand" Padding="10" Margin="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="View Reports" Foreground="White" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <Image Source="/Resources/right_arrow.png"  Width="15" VerticalAlignment="Center" Margin="5" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

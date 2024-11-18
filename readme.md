@@ -33,11 +33,8 @@ Ensure you have the following installed:
 
 ## **3. Open the Project**
 
-1. **Locate the Solution File**:
-   - Look for a `.sln` file in the root directory of the cloned repository. This is the solution file for the application.
-
-2. **Open the Solution in Visual Studio**:
-   - If the solution is not automatically opened after cloning, go to `File > Open > Project/Solution`, navigate to the `.sln` file, and open it.
+1. **Open the Solution in Visual Studio**:
+   - If the solution is not automatically opened after cloning, go to `File > Open > Project/Solution`, navigate to the `.sln` file, located in the root directory of the cloned repository, and open it.
 
 ---
 
@@ -54,12 +51,9 @@ Ensure you have the following installed:
 
 ## **5. Run the Application**
 
-1. **Set the Startup Project**:
-   - If there are multiple projects in the solution, right-click the desired startup project in the **Solution Explorer** and select **Set as Startup Project**.
-
-2. **Run the Application**:
+1. **Run the Application**:
    - Press `F5` or click the **Start** button (green play icon) to run the application.
-   - The application should launch in the appropriate environment (console, browser, or GUI).
+   - The application should launch in the appropriate environment.
 
 ---
 
@@ -123,7 +117,8 @@ You can also:
 ### **4.1. Data Structures Used**
 
 **4.1.1. Binary Tree**
-- A **binary tree** is a tree that has at most two children for any of its nodes. https://www.geeksforgeeks.org/applications-advantages-and-disadvantages-of-binary-tree/
+- A **binary tree** is a tree that has at most two children for any of its nodes.
+   - Reference: [GeeksforGeeks - Applications, Advantages and Disadvantages of Binary Tree](https://www.geeksforgeeks.org/applications-advantages-and-disadvantages-of-binary-tree)
 - A binary tree is used to store all Service Request data.
 
 - **Purpose**:
@@ -135,23 +130,100 @@ You can also:
   - **Traversal Flexibility**: Supports multiple traversal techniques (in-order, pre-order, post-order) for various use cases like displaying all requests in a specific order.
   - **Efficient Data Insertion**: Data can be quickly added without disrupting the overall structure.
 
+---
 
-**4.1.2 Binary Search Tree (BST)**
+**4.1.2. Binary Search Tree (BST)**
 - A BST is used to search, retrieve, and filter all Service Requests.
-- Advantages:
+- A BST arranges the elements in a specific order:
+  - The value of the left node must be smaller than the parent node.
+  - The value of the right node must be greater than the parent node.  
+  - This rule is applied recursively to both subtrees of the root.
+  - Reference: [JavaTPoint - Binary Search Tree](https://www.javatpoint.com/binary-search-tree)
 
-**4.1.2 Graph**
-- A graph is used manage complex relationships between the Service Requests, specifically the dependencies of each request.
-- Advantages:
+- **Purpose**:
 
-**4.1.2 Minimum Spanning Tree (MST)**
-- An MST is used to prevent recursion errors in the graph when adding dependencies.
-- Advantages:
+- **Advantages**:
+   - **Efficient Searching**: Searching for an element has a time complexity of \( O(\log n) \) for a balanced tree.  
+   - **Ordered Data Retrieval**: Enables in-order traversal for retrieving data in sorted order.  
+   - **Dynamic Updates**: Handles dynamic insertion and deletion of nodes while maintaining order.  
+   - **Structured Data**: Facilitates efficient range queries, such as retrieving all service requests between two dates.
 
-**4.1.2 Heap**
-- A heap is used to determine the most urgent event by checking which events has the most dependencies.
-- Advantages:
+
+---
+
+**4.1.3. Weighted Graph**
+- Represents nodes connected by edges, where weights indicate the cost or priority of the connection.
+- It uses an adjacency list or matrix for representation, and algorithms for processing the weights to find optimal paths or prevent cycles.
+  - Reference: Metcalf, L., & Casey, W. (2016). *Weighted Graph. In Cybersecurity and Applied Mathematics.*
+
+- **Purpose**:
+   - Used manage complex relationships between the Service Requests, specifically the dependencies of each request.
+
+- **Advantages:**
+   - **Models Complex Dependencies**: Efficiently represents service requests with dependencies like prerequisite tasks.  
+   - **Flexible Representation**: Can handle directed, undirected, and weighted relationships.  
+   - **Algorithm Compatibility**: Compatible with graph algorithms like Dijkstra's or Prim's for pathfinding and optimization.  
+   - **Visual Representation**: Graphs provide an intuitive way to understand and visualize relationships.
+
+---
+
+**4.1.4. Minimum Spanning Tree (MST)**
+- It uses Kruskal’s Minimum Spanning Tree (MST) Algorithm:
+  - Sorts all edges in the given graph in increasing order by weight.
+  - Adds edges to the MST if the newly added edge does not form a cycle.  
+  - Prevents cyclical recursion errors.
+  - Reference: [GeeksforGeeks - Kruskal’s MST Algorithm](https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/)
+
+- **Purpose**:
+   - Used to prevent recursion errors in the graph when adding dependencies.
+
+- **Advantages**:
+   - **Cycle Prevention**: Ensures the graph remains acyclic, which is critical for dependency management.  
+   - **Optimal Dependencies**: Guarantees the minimum total weight for the dependency network.  
+   - **Efficiency**: Operates with a time complexity of \( O(E \log E) \), suitable for large graphs.  
+   - **Foundation for Other Algorithms**: Forms the basis for solving network design problems like optimizing communication paths.
+
+
+---
+
+**4.1.5. Heap**
+- A heap is a form of binary tree where:
+  - In a min-heap, every node's value is less than or equal to its children.
+  - In a max-heap, every node's value is greater than or equal to its children.  
+- It is created by using a "heapify" operation to organize elements.
+  - Reference: [Stanford Lecture on Heaps](https://web.stanford.edu/class/archive/cs/cs161/cs161.1168/lecture4.pdf)
+
+- **Purpose**:
+   - Used to determine the most urgent event by checking which events has the most dependencies.
+
+- **Advantages**:
+   - **Efficient Priority Handling**: Provides \( O(1) \) access to the highest or lowest priority element (depending on heap type).  
+   - **Dynamic Updates**: Supports insertion and deletion with \( O(\log n) \) time complexity.  
+   - **Event Prioritization**: Quickly identifies and retrieves the most urgent service request.  
+   - **Memory Efficiency**: Requires minimal space compared to other priority queue implementations.  
+   - **Adaptable**: Can be used as a min-heap for least urgent tasks or a max-heap for most urgent tasks, based on the application's requirements.
 
 ---
 
 # **Recommended Technologies**
+
+## Database Technologies
+- SQLite: A lightweight, file-based database ideal for desktop applications with moderate data needs.
+- Entity Framework Core: Simplifies database interaction with LINQ and supports multiple database providers (SQL Server, SQLite, etc.).
+
+## Data Caching
+- SQLite with Local Caching: Store frequently accessed data locally to improve performance and support offline functionality.
+- In-Memory Caching: Cache temporary data during runtime to reduce database queries.
+
+## Performance Optimization
+- NLog or Serilog: For advanced logging to monitor app performance and troubleshoot issues.
+- Async/Await Patterns: Use asynchronous programming to prevent UI freezing during heavy operations like database queries or network calls.
+
+## Integration Tools
+- RestSharp: Simplifies API calls if your app integrates with external services.
+
+## Location and GIS Integration
+- Google Maps API: To provide precise location-based services or tracking.
+
+## Notifications
+- SignalR for WPF: Enables real-time communication for live updates and alerts.

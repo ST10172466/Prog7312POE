@@ -124,9 +124,9 @@ You can also:
 - A binary tree is used to store all Service Request data.
 
 - **Advantages**:
-  - **Hierarchical Organization**: Represents the service requests logically, making it easy to navigate through different layers of data.
-  - **Traversal Flexibility**: Supports multiple traversal techniques (in-order, pre-order, post-order) for various use cases like displaying all requests in a specific order.
-  - **Efficient Data Insertion**: Data can be quickly added without disrupting the overall structure.
+  - Represents the Service Requests logically, making it easy to navigate through different layers of data.
+  - Supports multiple traversal techniques for various use cases like displaying all requests in a specific order.
+  - Data can be quickly added without disrupting the overall structure.
 
 ---
 
@@ -139,7 +139,7 @@ You can also:
   - Reference: [JavaTPoint - Binary Search Tree](https://www.javatpoint.com/binary-search-tree)
 
 - **Advantages**:
-   - Searching for an element has a time complexity of \( O(\log n) \) for a balanced tree.  
+   - Efficient searching for Service Requests.  
    - Enables in-order traversal for retrieving data in sorted order.  
    - Handles dynamic insertion and deletion of nodes while maintaining order.  
    - Facilitates efficient range queries, such as retrieving all service requests between two dates.
@@ -154,27 +154,24 @@ You can also:
   - Reference: [Metcalf, L., & Casey, W. (2016). *Weighted Graph. In Cybersecurity and Applied Mathematics.*](https://www.sciencedirect.com/book/9780128044520/cybersecurity-and-applied-mathematics)
 
 - **Advantages:**
-   - Efficiently represents service requests with dependencies like prerequisite tasks.  
+   - Efficiently represents Service Requests with dependencies like prerequisite tasks.  
    - Can handle directed, undirected, and weighted relationships.  
-   - Compatible with graph algorithms like Dijkstra's or Prim's for pathfinding and optimization.  
+   - Compatible with graph algorithms.  
    - Graphs provide an intuitive way to understand and visualize relationships.
 
 ---
 
 **4.1.4. Minimum Spanning Tree (MST)**
-- Used to prevent recursion errors in the graph when adding dependencies.
+- Used to prevent cyclical recursion errors in the graph when adding dependencies.
 - It uses Kruskal’s Minimum Spanning Tree (MST) Algorithm:
   - Sorts all edges in the given graph in increasing order by weight.
   - Adds edges to the MST if the newly added edge does not form a cycle.  
-  - Prevents cyclical recursion errors.
   - Reference: [GeeksforGeeks - Kruskal’s MST Algorithm](https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/)
 
 - **Advantages**:
    - Ensures the graph remains acyclic, which is critical for dependency management.  
    - Guarantees the minimum total weight for the dependency network.  
-   - Operates with a time complexity of \( O(E \log E) \), suitable for large graphs.  
-   - Forms the basis for solving network design problems like optimizing communication paths.
-
+   - Suitable for large scale graphs.  
 
 ---
 
@@ -187,9 +184,7 @@ You can also:
   - Reference: [Stanford Lecture on Heaps](https://web.stanford.edu/class/archive/cs/cs161/cs161.1168/lecture4.pdf)
 
 - **Advantages**:
-   - Provides \( O(1) \) access to the highest or lowest priority element (depending on heap type).  
-   - Supports insertion and deletion with \( O(\log n) \) time complexity.  
-   - Quickly identifies and retrieves the most urgent service request.  
+   - Quickly identifies and retrieves the most urgent Service Request.  
    - Requires minimal space compared to other priority queue implementations.  
    - Can be used as a min-heap for least urgent tasks or a max-heap for most urgent tasks, based on the application's requirements.
 

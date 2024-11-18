@@ -30,7 +30,6 @@ namespace POEPart1.ViewModels
             set { serviceRequests = value; OnPropertyChanged(nameof(ServiceRequests)); }
         }
 
-
         /// <summary>
         /// String that holds the ID of the most urgent request
         /// </summary>
@@ -130,26 +129,6 @@ namespace POEPart1.ViewModels
             AddDependency(118, 115, 3); // Street Sweeping depends on Drainage System Cleaning
 
             DetermineMostUrgentRequest();
-        }
-
-        //-----------------------------------------------------------------------------------------------//
-
-        // Population Methods
-
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to add a service request
-        /// </summary>
-        /// <param name="request"></param>
-        public void AddServiceRequest(ServiceRequest request)
-        {
-            if (serviceRequestBST.Insert(request))
-            {
-                ServiceRequests.Add(request);
-
-                // Add to graph with no dependencies initially
-                serviceRequestGraph.AddEdge(request, null, 0);
-            }
         }
 
         //-----------------------------------------------------------------------------------------------//

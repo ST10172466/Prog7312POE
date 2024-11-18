@@ -278,6 +278,10 @@ namespace POEPart1.Views
         }
 
         //-----------------------------------------------------------------------------------------------//
+
+        // Display Methods
+
+        //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Method to display the selected request
         /// </summary>
@@ -317,6 +321,12 @@ namespace POEPart1.Views
             }
         }
 
+        //-----------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Method to display the selected dependency
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstDependencies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstDependencies.SelectedItem is ServiceRequest selectedRequest)

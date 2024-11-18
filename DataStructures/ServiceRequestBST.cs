@@ -9,6 +9,7 @@ namespace POEPart1.DataStructures
 {
     public class ServiceRequestBST
     {
+        //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// TreeNode that holds the root of the BST
         /// </summary>

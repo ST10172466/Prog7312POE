@@ -193,22 +193,22 @@ You can also:
 # **Recommended Technologies**
 
 ## Database Technologies
-- SQLite: A lightweight, file-based database ideal for desktop applications with moderate data needs.
-- Entity Framework Core: Simplifies database interaction with LINQ and supports multiple database providers (SQL Server, SQLite, etc.).
+- SQLite: A lightweight, file-based database that could be used to store Report, Event and Service Request data.
+- Entity Framework Core: Simplifies database interaction with LINQ and supports multiple database providers, including the aforementioned SQLite.
 
 ## Data Caching
-- SQLite with Local Caching: Store frequently accessed data locally to improve performance and support offline functionality.
+- SQLite with Local Caching: Since SQLite is already incorporated for the database, we can make use of the included functionality to store frequently accessed data locally to improve performance and support offline functionality.
 - In-Memory Caching: Cache temporary data during runtime to reduce database queries.
 
 ## Performance Optimization
 - NLog or Serilog: For advanced logging to monitor app performance and troubleshoot issues.
 - Async/Await Patterns: Use asynchronous programming to prevent UI freezing during heavy operations like database queries or network calls.
 
-## Integration Tools
-- RestSharp: Simplifies API calls if your app integrates with external services.
+## Location and Geographic Information Systems (GIS) Integration
+- Google Maps API: To provide precise location-based services or tracking for more accurate locations for reports and events.
 
-## Location and GIS Integration
-- Google Maps API: To provide precise location-based services or tracking.
+## Integration Tools
+- RestSharp: Simplifies API calls with previously mentioned Google Maps API.
 
 ## Notifications
-- SignalR for WPF: Enables real-time communication for live updates and alerts.
+- SignalR for WPF: Enables real-time communication for live updates and alerts which could be used to update users on new events or issues in their area.

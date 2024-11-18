@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace POEPart1.ViewModels
@@ -77,6 +78,7 @@ namespace POEPart1.ViewModels
         {
             PopulateEventDictionary();
         }
+
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Method to populate the event dictionary
@@ -270,7 +272,7 @@ namespace POEPart1.ViewModels
             }
             else
             {
-                Console.WriteLine("No events to undo.");
+                MessageBox.Show("No events to undo.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -287,7 +289,7 @@ namespace POEPart1.ViewModels
             }
             else
             {
-                Console.WriteLine("No events to redo.");
+                MessageBox.Show("No events to redo.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

@@ -156,9 +156,8 @@
             </Button>
         </Grid>
         
-
         <!-- Request List Box -->
-        <ListBox x:Name="lstRequests" ItemsSource="{Binding ServiceRequests}" DisplayMemberPath="Title" SelectionChanged="lstRequests_SelectionChanged" Grid.Row="4" BorderThickness="0,0,1,0"/>
+        <ListBox x:Name="lstRequests" ItemsSource="{Binding ServiceRequests}" DisplayMemberPath="Title" SelectionChanged="lstRequests_SelectionChanged" Grid.Row="4" BorderThickness="0,0,1,0" Margin="10,0,0,0" />
 
         <!-- Most Urgent Request -->
         <Grid Grid.Row="3" Grid.Column="1" Margin="10" >

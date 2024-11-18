@@ -277,33 +277,42 @@ namespace POEPart1.Views
             this.Close();
         }
 
+        //-----------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Method to display the selected request
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstRequests_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstRequests.SelectedItem is ServiceRequest selectedRequest)
             {
-                txtRequestID.Text = selectedRequest.ServiceRequestID.ToString();
-                txtRequestTitle.Text = selectedRequest.Title;
-                txtRequestStatus.Text = selectedRequest.Status;
-                txtRequestDate.Text = selectedRequest.DateSubmitted.ToString("MMMM dd, yyyy");
-                txtRequestDescription.Text = selectedRequest.Description;
-
-                // Displaying priority in a more intuitive way
-                switch (selectedRequest.Priority)
+                if (selectedRequest.Title != "No requests found.")
                 {
-                    case 1:
-                    case 2:
-                        txtRequestPriority.Text = "High";
-                        break;
-                    case 3:
-                    case 4:
-                        txtRequestPriority.Text = "Medium";
-                        break;
-                    case 5:
-                        txtRequestPriority.Text = "Low";
-                        break;
-                    default:
-                        txtRequestPriority.Text = "Unknown"; // In case of an invalid priority
-                        break;
+                    txtRequestID.Text = selectedRequest.ServiceRequestID.ToString();
+                    txtRequestTitle.Text = selectedRequest.Title;
+                    txtRequestStatus.Text = selectedRequest.Status;
+                    txtRequestDate.Text = selectedRequest.DateSubmitted.ToString("MMMM dd, yyyy");
+                    txtRequestDescription.Text = selectedRequest.Description;
+
+                    // Displaying priority in a more intuitive way
+                    switch (selectedRequest.Priority)
+                    {
+                        case 1:
+                        case 2:
+                            txtRequestPriority.Text = "High";
+                            break;
+                        case 3:
+                        case 4:
+                            txtRequestPriority.Text = "Medium";
+                            break;
+                        case 5:
+                            txtRequestPriority.Text = "Low";
+                            break;
+                        default:
+                            txtRequestPriority.Text = "Unknown"; // In case of an invalid priority
+                            break;
+                    }
                 }
             }
         }

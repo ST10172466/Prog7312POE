@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using POEPart1.Models;
+using POEPart1.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -25,6 +26,11 @@ namespace POEPart1
         /// </summary>
         private static List<Report> reportsList = new List<Report>();
 
+        /// <summary>
+        /// Local ReportIssuesViewModel object
+        /// </summary>
+        private ReportIssuesViewModel viewModel;
+
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Constructor
@@ -32,6 +38,8 @@ namespace POEPart1
         public ReportIssuesWindow()
         {
             InitializeComponent();
+            viewModel = new ReportIssuesViewModel();
+            DataContext = viewModel;
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -42,13 +50,8 @@ namespace POEPart1
         /// <param name="e"></param>
         private void btnAttachMedia_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = false;
-            if (openFileDialog.ShowDialog() == true)
-            {
-                attachmentFilePath = openFileDialog.FileName;
-                chkbxAttached.IsChecked = true;
-            }
+            viewModel.AttachMedia();
+            chkbxAttached.IsChecked = !string.IsNullOrEmpty(viewModel.AttachmentFilePath);
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -59,73 +62,13 @@ namespace POEPart1
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (InputValidation())
-                {
-                    Report report = new Report
-                    {
-                        Name = txtName.Text,
-                        Location = txtLocation.Text,
-                        Category = cmbCategory.Text,
-                        Description = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text,
-                        AttachmentFilePath = attachmentFilePath
-                    };
+            string name = txtName.Text;
+            string location = txtLocation.Text;
+            string category = cmbCategory.Text;
+            string description = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text;
 
-                    reportsList.Add(report);
+            viewModel.SubmitReport(name, location, category, description);
 
-                    MessageBox.Show("Issue reported successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.ResetPage();
-                }
-                else
-                {
-                    MessageBox.Show("Please fill in all the fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error occurred while reporting the issue!\n" + ex.ToString());
-            }
-        }
-
-        //-----------------------------------------------------------------------------------------------//
-
-        // Input Validation
-
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to ensure inputs are valid
-        /// </summary>
-        /// <returns></returns>
-        private bool InputValidation()
-        {
-            if (!string.IsNullOrEmpty(txtName.Text)
-                && !string.IsNullOrEmpty(txtLocation.Text)
-                && cmbCategory.SelectedIndex != 0
-                && !string.IsNullOrEmpty(new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text)
-                && !string.IsNullOrEmpty(attachmentFilePath))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        //-----------------------------------------------------------------------------------------------//
-
-        // Format
-
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to reset the page format
-        /// </summary>
-        private void ResetPage()
-        {
-            txtName.Clear();
-            txtLocation.Clear();
-            cmbCategory.SelectedIndex = 0;
-            rtbDescription.Document.Blocks.Clear();
-            attachmentFilePath = string.Empty;
-            chkbxAttached.IsChecked = false;
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -153,9 +96,9 @@ namespace POEPart1
         /// <param name="e"></param>
         private void btnViewReport_Click(object sender, RoutedEventArgs e)
         {
-            if (reportsList.Count != 0)
+            if (viewModel.ReportsList.Count != 0)
             {
-                ReportViewWindow reportViewWindow = new ReportViewWindow(reportsList);
+                ReportViewWindow reportViewWindow = new ReportViewWindow(viewModel.ReportsList);
                 reportViewWindow.Show();
                 this.Close();
             }

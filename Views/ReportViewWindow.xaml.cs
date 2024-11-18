@@ -1,5 +1,6 @@
 ﻿using Microsoft.Office.Interop.Word;
 using POEPart1.Models;
+using POEPart1.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +16,10 @@ namespace POEPart1
     /// </summary>
     public partial class ReportViewWindow : System.Windows.Window
     {
-        private List<Report> reports;
+        /// <summary>
+        /// Local ReportViewModel object
+        /// </summary>
+        private ReportViewModel viewModel;
 
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
@@ -25,8 +29,8 @@ namespace POEPart1
         public ReportViewWindow(List<Report> reports)
         {
             InitializeComponent();
-            this.reports = reports;
-            lstReports.ItemsSource = reports;
+            viewModel = new ReportViewModel(reports);
+            DataContext = viewModel;
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -39,9 +43,7 @@ namespace POEPart1
         {
             if (lstReports.SelectedItem is Report selectedReport)
             {
-                txtLocation.Text = selectedReport.Location;
-                txtCategory.Text = selectedReport.Category;
-                txtDescription.Text = selectedReport.Description;
+                viewModel.SelectedReport = selectedReport;
 
                 if (!string.IsNullOrEmpty(selectedReport.AttachmentFilePath))
                 {

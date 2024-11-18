@@ -132,33 +132,7 @@ namespace POEPart1
         /// <param name="e"></param>
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchTerm = txtSearch.Text.ToLower();
-            var selectedCategory = cbCategoryFilter.SelectedItem is ComboBoxItem selectedItem
-                ? selectedItem.Content.ToString()
-                : string.Empty;
-
-            DateTime? startDate = dpStart.SelectedDate;
-            DateTime? endDate = dpEnd.SelectedDate;
-
-            viewModel.FilterEvents(searchTerm, selectedCategory, startDate, endDate);
-
-            /*
-            var filteredEvents = eventDictionary.SelectMany(entry => entry.Value)
-                .Where(evt => evt.Title.ToLower().Contains(searchTerm)
-                              && (selectedCategory.Equals("-- Filter by Category --") || evt.Category == selectedCategory)
-                              && (!startDate.HasValue || evt.Date >= startDate.Value)
-                              && (!endDate.HasValue || evt.Date <= endDate.Value))
-                .ToList();
-
-            // Display filtered events in the ListBox
-            if (filteredEvents.Count > 0)
-            {
-                lstEvents.ItemsSource = filteredEvents;
-            }
-            else
-            {
-                lstEvents.ItemsSource = new List<Event> { new Event { Title = "No events found." } };
-            }*/
+            FilterEvents();
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -171,35 +145,6 @@ namespace POEPart1
         /// </summary>
         private void btnTitleSort_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            // Use the current items in the listbox to sort
-            var currentEvents = lstEvents.ItemsSource as List<Event>;
-
-            if (currentEvents != null)
-            {
-                List<Event> sortedEvents;
-
-                if (this.titleSortCheck)
-                {
-                    // Sorts the events by title in ascending order
-                    sortedEvents = currentEvents.OrderBy(x => x.Title).ToList();
-                    HideSortArrows();
-                    titleAscArrow.Visibility = Visibility.Visible;
-                    this.titleSortCheck = false;
-                }
-                else
-                {
-                    // Sorts the events by title in descending order
-                    sortedEvents = currentEvents.OrderByDescending(x => x.Title).ToList();
-                    HideSortArrows();
-                    titleDescArrow.Visibility = Visibility.Visible;
-                    this.titleSortCheck = true;
-                }
-
-                // Update listbox
-                lstEvents.ItemsSource = sortedEvents;
-            }*/
-
             viewModel.SortEventsByTitle();
             HideSortArrows();
             titleAscArrow.Visibility = viewModel.titleSortCheck ? Visibility.Visible : Visibility.Collapsed;
@@ -227,35 +172,7 @@ namespace POEPart1
             {
                 if (cbCategoryFilter.SelectedItem is ComboBoxItem selectedItem)
                 {
-                    var selectedCategory = selectedItem.Content.ToString();
-                    string searchTerm = txtSearch.Text.ToLower();
-
-                    var filteredEvents = string.IsNullOrEmpty(searchTerm)
-                        ? eventDictionary.SelectMany(x => x.Value).ToList() // Get all events
-                        : eventDictionary.SelectMany(entry => entry.Value)
-                                         .Where(evt => evt.Title.ToLower().Contains(searchTerm))
-                                         .ToList(); // Filter by search term
-
-                    // Filter events by selected date range
-                    DateTime? startDate = dpStart.SelectedDate;
-                    DateTime? endDate = dpEnd.SelectedDate;
-
-                    /*
-                    if (startDate.HasValue)
-                    {
-                        filteredEvents = filteredEvents.Where(evt => evt.Date >= startDate.Value).ToList();
-                    }
-
-                    if (endDate.HasValue)
-                    {
-                        filteredEvents = filteredEvents.Where(evt => evt.Date <= endDate.Value).ToList();
-                    }
-
-                    // Apply category filter on top of the search results
-                    CategoryFilterEvents(selectedCategory, filteredEvents);
-                    */
-                    viewModel.FilterEvents(searchTerm, selectedCategory, startDate, endDate);
-
+                    FilterEvents();
                 }
             }
         }
@@ -302,35 +219,6 @@ namespace POEPart1
         /// </summary>
         private void btnCategorySort_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            // Use the current items in the listbox to sort
-            var currentEvents = lstEvents.ItemsSource as List<Event>;
-
-            if (currentEvents != null)
-            {
-                List<Event> sortedEvents;
-
-                if (this.categorySortCheck)
-                {
-                    // Sorts the events by title in ascending order
-                    sortedEvents = currentEvents.OrderBy(x => x.Category).ToList();
-                    HideSortArrows();
-                    catAscArrow.Visibility = Visibility.Visible;
-                    this.categorySortCheck = false;
-                }
-                else
-                {
-                    // Sorts the events by title in descending order
-                    sortedEvents = currentEvents.OrderByDescending(x => x.Category).ToList();
-                    HideSortArrows();
-                    catDescArrow.Visibility = Visibility.Visible;
-                    this.categorySortCheck = true;
-                }
-
-                // Update listbox
-                lstEvents.ItemsSource = sortedEvents;
-            }*/
-
             viewModel.SortEventsByCategory();
             HideSortArrows();
             catAscArrow.Visibility = viewModel.categorySortCheck ? Visibility.Visible : Visibility.Collapsed;
@@ -358,7 +246,7 @@ namespace POEPart1
                     return;
                 }
             }
-            DateFilterEvents();
+            FilterEvents();
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -378,14 +266,18 @@ namespace POEPart1
                     return;
                 }
             }
-            DateFilterEvents();
+            FilterEvents();
         }
+
+        //-----------------------------------------------------------------------------------------------//
+
+        // Filter Method
 
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Method to filter events between selected dates
         /// </summary>
-        private void DateFilterEvents()
+        private void FilterEvents()
         {
             string searchTerm = txtSearch.Text.ToLower();
             string selectedCategory = cbCategoryFilter.SelectedItem is ComboBoxItem selectedItem ? selectedItem.Content.ToString() : null;
@@ -394,34 +286,6 @@ namespace POEPart1
             DateTime? endDate = dpEnd.SelectedDate;
 
             viewModel.FilterEvents(searchTerm, selectedCategory, startDate, endDate);
-/*
-            // Start with all events
-            var filteredEvents = eventDictionary.SelectMany(entry => entry.Value)
-                                                .Where(evt =>
-                                                    (string.IsNullOrEmpty(searchTerm) || evt.Title.ToLower().Contains(searchTerm)) &&
-                                                    (selectedCategory.Equals("-- Filter by Category --") || evt.Category == selectedCategory));
-
-            // Filter based on the selected dates
-            if (startDate.HasValue && endDate.HasValue)
-            {
-                filteredEvents = filteredEvents.Where(evt => evt.Date.Date >= startDate.Value.Date && evt.Date.Date <= endDate.Value.Date);
-            }
-            else if (startDate.HasValue)
-            {
-                filteredEvents = filteredEvents.Where(evt => evt.Date.Date >= startDate.Value.Date);
-            }
-            else if (endDate.HasValue)
-            {
-                filteredEvents = filteredEvents.Where(evt => evt.Date.Date <= endDate.Value.Date);
-            }
-
-            // Update ListBox with filtered events
-            lstEvents.ItemsSource = filteredEvents.ToList();
-
-            if (!filteredEvents.Any())
-            {
-                lstEvents.ItemsSource = new List<Event> { new Event { Title = "No events found." } };
-            }*/
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -430,32 +294,6 @@ namespace POEPart1
         /// </summary>
         private void btnDateSort_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            // Use the current items in the listbox to sort
-            var currentEvents = lstEvents.ItemsSource as List<Event>;
-
-            if (currentEvents != null)
-            {
-                List<Event> sortedEvents;
-
-                if (this.dateSortCheck)
-                {
-                    sortedEvents = currentEvents.OrderBy(x => x.Date).ToList();
-                    HideSortArrows();
-                    dateAscArrow.Visibility = Visibility.Visible;
-                    this.dateSortCheck = false;
-                }
-                else
-                {
-                    sortedEvents = currentEvents.OrderByDescending(x => x.Date).ToList();
-                    HideSortArrows();
-                    dateDescArrow.Visibility = Visibility.Visible;
-                    this.dateSortCheck = true;
-                }
-
-                // Update listbox
-                lstEvents.ItemsSource = sortedEvents;
-            }*/
             viewModel.SortEventsByDate();
             HideSortArrows();
             dateAscArrow.Visibility = viewModel.dateSortCheck ? Visibility.Visible : Visibility.Collapsed;
@@ -478,13 +316,12 @@ namespace POEPart1
             {
                 if (selectedEvent.Title != "No events found.")
                 {
-                    //ViewEvent(selectedEvent);
                     viewModel.ViewEvent(selectedEvent);
-
                 }
             }
         }
 
+        //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Method to handle recommendations selection
         /// </summary>
@@ -494,91 +331,10 @@ namespace POEPart1
         {
             if (lstRecommendations.SelectedItem is Event selectedEvent)
             {
-                //ViewEvent(selectedEvent);
                 viewModel.ViewEvent(selectedEvent);
             }
         }
 
-        /*
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to handle displaying the selected event and managing the undo and redo stacks
-        /// </summary>
-        /// <param name="selectedEvent"></param>
-        private void ViewEvent(Event selectedEvent)
-        {
-            if (selectedEvent != null)
-            {
-                // Push the current event to the undo stack
-                if (currentEvent != null)
-                {
-                    undoStack.Push(currentEvent);
-                }
-
-                // Clear the redo stack since a new event is being viewed
-                redoStack.Clear();
-
-                currentEvent = selectedEvent;
-                DisplayEvent(currentEvent);
-            }
-        }
-
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to display the selected event
-        /// </summary>
-        /// <param name="eventToDisplay"></param>
-        private void DisplayEvent(Event eventToDisplay)
-        {
-            if (eventToDisplay != null)
-            {
-                txtEventTitle.Text = eventToDisplay.Title;
-                txtEventDate.Text = eventToDisplay.Date.ToString("MMMM dd, yyyy");
-                txtEventCategory.Text = eventToDisplay.Category;
-                txtEventDescription.Text = eventToDisplay.Description;
-
-                if (eventToDisplay.Image != null)
-                {
-                    imgAttachment.Visibility = Visibility.Visible;
-                    imgAttachment.Source = eventToDisplay.Image;  // Display the stored image
-                }
-                else
-                {
-                    imgAttachment.Visibility = Visibility.Collapsed;  // Hide if no image
-                }
-
-                // Populate recommendations
-                PopulateRecommendations(eventToDisplay);
-            }
-        }
-
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to populate the recommendations ListBox
-        /// </summary>
-        /// <param name="selectedEvent"></param>
-        private void PopulateRecommendations(Event selectedEvent)
-        {
-            // Define the date range for recommendations (one week before and after)
-            DateTime startDate = selectedEvent.Date.AddDays(-7);
-            DateTime endDate = selectedEvent.Date.AddDays(7);
-
-            var recommendedEvents = eventDictionary.SelectMany(entry => entry.Value)
-                .Where(evt => (evt.Category == selectedEvent.Category ||
-                               (evt.Date >= startDate && evt.Date <= endDate))
-                               && evt != selectedEvent)
-                .ToList();
-
-            if (recommendedEvents.Count == 0)
-            {
-                lstRecommendations.ItemsSource = new List<string> { "No similar events found." };
-            }
-            else
-            {
-                lstRecommendations.ItemsSource = recommendedEvents;
-            }
-        }
-        */
         //-----------------------------------------------------------------------------------------------//
 
         // Undo and Redo Methods
@@ -592,22 +348,6 @@ namespace POEPart1
         private void btnUndo_Click(object sender, RoutedEventArgs e)
         {
             viewModel.Undo();
-            /*
-            if (undoStack.Count > 0)
-            {
-                // Move the current event to the redo stack
-                redoStack.Push(currentEvent);
-
-                // Retrieve the last viewed event
-                currentEvent = undoStack.Pop();
-
-                // Display the current event
-                DisplayEvent(currentEvent);
-            }
-            else
-            {
-                MessageBox.Show("No events to undo.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }*/
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -619,23 +359,6 @@ namespace POEPart1
         private void btnRedo_Click(object sender, RoutedEventArgs e)
         {
             viewModel.Redo();
-
-            /*
-            if (redoStack.Count > 0)
-            {
-                // Move the current event to the undo stack
-                undoStack.Push(currentEvent);
-
-                // Retrieve the next event to redo
-                currentEvent = redoStack.Pop();
-
-                // Display the current event
-                DisplayEvent(currentEvent);
-            }
-            else
-            {
-                MessageBox.Show("No events to redo.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }*/
         }
 
         //-----------------------------------------------------------------------------------------------//

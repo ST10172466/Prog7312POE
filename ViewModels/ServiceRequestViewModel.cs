@@ -272,11 +272,19 @@ namespace POEPart1.ViewModels
                 filteredRequests = filteredRequests.Where(r => r.DateSubmitted <= endDate.Value).ToList();
             }
 
-            // Update the ObservableCollection
-            ServiceRequests.Clear();
-            foreach (var request in filteredRequests)
+            // Error check for no events found
+            if (filteredRequests.Count > 0)
             {
-                ServiceRequests.Add(request);
+                // Update the ObservableCollection
+                ServiceRequests.Clear();
+                foreach (var request in filteredRequests)
+                {
+                    ServiceRequests.Add(request);
+                }
+            }
+            else
+            {
+                ServiceRequests = new ObservableCollection<ServiceRequest> { new ServiceRequest { Title = "No requests found." } };
             }
 
             OnPropertyChanged(nameof(ServiceRequests));

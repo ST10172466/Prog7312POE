@@ -97,7 +97,8 @@
     <Compile Include="COCTMainWindow.xaml.cs">
       <DependentUpon>COCTMainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EventsWindow.xaml.cs">
+    <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="Views\EventsWindow.xaml.cs">
       <DependentUpon>EventsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ServiceRequest.cs" />
@@ -106,13 +107,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ReportIssuesWindow.xaml.cs">
+    <Compile Include="Views\ReportIssuesWindow.xaml.cs">
       <DependentUpon>ReportIssuesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportViewWindow.xaml.cs">
+    <Compile Include="Views\ReportViewWindow.xaml.cs">
       <DependentUpon>ReportViewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\EventViewModel.cs" />
+    <Compile Include="ViewModels\ReportIssuesViewModel.cs" />
     <Compile Include="ViewModels\ServiceRequestViewModel.cs" />
     <Compile Include="Views\ServiceRequestWindow.xaml.cs">
       <DependentUpon>ServiceRequestWindow.xaml</DependentUpon>
@@ -125,15 +127,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="EventsWindow.xaml">
+    <Page Include="Views\EventsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ReportIssuesWindow.xaml">
+    <Page Include="Views\ReportIssuesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ReportViewWindow.xaml">
+    <Page Include="Views\ReportViewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

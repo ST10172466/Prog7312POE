@@ -9,15 +9,38 @@ namespace POEPart1.Models
 {
     public class Event
     {
-        public int EventID { get; set; }
+        //-----------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// String that holds the Title of the event
+        /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// String that holds the Description of the event
+        /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// DateTime that holds the Date of the event
+        /// </summary>
         public DateTime Date { get; set; }
-        public string Location { get; set; }
+
+        /// <summary>
+        /// String that holds the Category of the event
+        /// </summary>
         public string Category { get; set; }
+
+        /// <summary>
+        /// BitmapImage that holds the Image of the event
+        /// </summary>
         public BitmapImage Image { get; set; }
 
-        // Override Equals and GetHashCode to ensure unique events based on Date and Title
+        //-----------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Method to override Equals to ensure unique events based on Date and Title
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj is Event other)
@@ -28,6 +51,11 @@ namespace POEPart1.Models
             return false;
         }
 
+        //-----------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Method to override GetHashCode to ensure unique events based on Date and Title
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             // Combine the hash codes of the Date and Title properties
@@ -39,5 +67,8 @@ namespace POEPart1.Models
                 return hash;
             }
         }
+
+        //-----------------------------------------------------------------------------------------------//
     }
 }
+//------------------------------------------..oo00 End of File 00oo..-------------------------------------------//

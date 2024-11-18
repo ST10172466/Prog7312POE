@@ -9,6 +9,7 @@ namespace POEPart1.DataStructures
 {
     public class TreeNode
     {
+        //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Data of the node
         /// </summary>

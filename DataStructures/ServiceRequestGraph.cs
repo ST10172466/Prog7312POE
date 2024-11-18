@@ -78,7 +78,7 @@ namespace POEPart1.DataStructures
             {
                 var neighbors = GetNeighbors(request.ServiceRequestID);
                 dependencyCount[request] = neighbors.Count;
-                Console.WriteLine($"Request '{request.Title}' has {neighbors.Count} dependencies.");
+                Console.WriteLine($"Request '{request.ServiceRequestID}' has {neighbors.Count} dependencies.");
             }
 
             return dependencyCount;
@@ -144,6 +144,7 @@ namespace POEPart1.DataStructures
             var parent = new Dictionary<int, int>();
             var rank = new Dictionary<int, int>();
 
+            // Initialize the parent and rank dictionaries
             foreach (var edge in edges)
             {
                 parent[edge.from.ServiceRequestID] = edge.from.ServiceRequestID;
@@ -152,6 +153,7 @@ namespace POEPart1.DataStructures
                 rank[edge.to.ServiceRequestID] = 0;
             }
 
+            // Find the root of the set
             int Find(int i)
             {
                 if (parent[i] != i)
@@ -161,6 +163,7 @@ namespace POEPart1.DataStructures
                 return parent[i];
             }
 
+            // Union two sets
             void Union(int x, int y)
             {
                 int rootX = Find(x);
@@ -184,9 +187,11 @@ namespace POEPart1.DataStructures
                 }
             }
 
+            // Sort the edges by weight
             var mst = new List<(ServiceRequest from, ServiceRequest to, int weight)>();
             var sortedEdges = edges.OrderBy(e => e.weight).ToList();
 
+            // Kruskal's algorithm to add edges to the minimum spanning tree
             foreach (var edge in sortedEdges)
             {
                 int rootFrom = Find(edge.from.ServiceRequestID);
@@ -197,65 +202,13 @@ namespace POEPart1.DataStructures
                     mst.Add(edge);
                     Union(rootFrom, rootTo);
                 }
+                else
+                {
+                    Console.WriteLine($"Cycle detected: Edge from '{edge.from.Title}' to '{edge.to.Title}' with weight {edge.weight} causes a cycle.");
+                }
             }
 
             return mst;
-        }
-
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to check if the graph has a cycle
-        /// </summary>
-        /// <returns></returns>
-        public bool HasCycle()
-        {
-            var parent = new Dictionary<int, int>();
-
-            foreach (var edge in edges)
-            {
-                parent[edge.from.ServiceRequestID] = edge.from.ServiceRequestID;
-                if (edge.to != null)
-                {
-                    parent[edge.to.ServiceRequestID] = edge.to.ServiceRequestID;
-                }
-            }
-
-            int Find(int i)
-            {
-                if (parent[i] != i)
-                {
-                    parent[i] = Find(parent[i]);
-                }
-                return parent[i];
-            }
-
-            void Union(int x, int y)
-            {
-                int rootX = Find(x);
-                int rootY = Find(y);
-
-                if (rootX != rootY)
-                {
-                    parent[rootY] = rootX;
-                }
-            }
-
-            foreach (var edge in edges)
-            {
-                if (edge.to == null) continue;
-
-                int rootFrom = Find(edge.from.ServiceRequestID);
-                int rootTo = Find(edge.to.ServiceRequestID);
-
-                if (rootFrom == rootTo)
-                {
-                    return true;
-                }
-
-                Union(rootFrom, rootTo);
-            }
-
-            return false;
         }
 
         //-----------------------------------------------------------------------------------------------//

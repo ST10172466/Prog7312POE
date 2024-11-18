@@ -13,22 +13,27 @@ namespace POEPart1.Models
         /// Int that holds the ID of the service request
         /// </summary>
         public int ServiceRequestID { get; set; }
+
         /// <summary>
         /// String that holds the Title of the service request
         /// </summary>
         public string Title { get; set; }
+
         /// <summary>
         /// String that holds the Status of the service request
         /// </summary>
         public string Status { get; set; }
+
         /// <summary>
         /// DateTime that holds the Date of the service request
         /// </summary>
         public DateTime DateSubmitted { get; set; }
+
         /// <summary>
         /// String that holds the Description of the service request
         /// </summary>
         public string Description { get; set; }
+
         /// <summary>
         /// Int that holds the Priority of the service request
         /// </summary>

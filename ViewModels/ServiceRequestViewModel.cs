@@ -24,10 +24,6 @@ namespace POEPart1.ViewModels
         /// ObservableCollection of ServiceRequests
         /// </summary>
         private ObservableCollection<ServiceRequest> serviceRequests;
-
-        /// <summary>
-        /// ObservableCollection of ServiceRequests Constructor
-        /// </summary>
         public ObservableCollection<ServiceRequest> ServiceRequests
         {
             get => serviceRequests;
@@ -39,10 +35,6 @@ namespace POEPart1.ViewModels
         /// String that holds the ID of the most urgent request
         /// </summary>
         private string mostUrgentRequestID;
-
-        /// <summary>
-        /// String of most urgent request ID Constructor
-        /// </summary>
         public string MostUrgentRequestID
         {
             get { return mostUrgentRequestID; }
@@ -57,10 +49,6 @@ namespace POEPart1.ViewModels
         /// String that holds the Title of the most urgent request
         /// </summary>
         private string mostUrgentRequestTitle;
-
-        /// <summary>
-        /// String of most urgent request Title Constructor
-        /// </summary>
         public string MostUrgentRequestTitle
         {
             get { return mostUrgentRequestTitle; }
@@ -71,6 +59,9 @@ namespace POEPart1.ViewModels
             }
         }
 
+        /// <summary>
+        /// ObservableCollection of the most urgent Service Request dependencies
+        /// </summary>
         private ObservableCollection<ServiceRequest> mostUrgentRequestDependencies;
         public ObservableCollection<ServiceRequest> MostUrgentRequestDependencies
         {
@@ -93,28 +84,28 @@ namespace POEPart1.ViewModels
             serviceRequests = new ObservableCollection<ServiceRequest>
             {
                 new ServiceRequest { ServiceRequestID = 101, Title = "Water Leak Repair", DateSubmitted = DateTime.Now.AddDays(-5), Status = "In Progress", Description = "Leaking water pipe at location.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 102, Title = "Pothole Fix", DateSubmitted = DateTime.Now.AddDays(-10), Status = "Completed", Description = "Repair pothole on main street.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 103, Title = "Street Light Repair", DateSubmitted = DateTime.Now.AddDays(-2), Status = "Pending", Description = "Street light flickering at park entrance.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 104, Title = "Park Clean-Up", DateSubmitted = DateTime.Now.AddDays(-8), Status = "In Progress", Description = "Scheduled clean-up for local park.", Priority = 1 },
+                new ServiceRequest { ServiceRequestID = 102, Title = "Pothole Fix", DateSubmitted = DateTime.Now.AddDays(-10), Status = "Completed", Description = "Repair pothole on main street.", Priority = 3 },
+                new ServiceRequest { ServiceRequestID = 103, Title = "Street Light Repair", DateSubmitted = DateTime.Now.AddDays(-2), Status = "Pending", Description = "Street light flickering at park entrance.", Priority = 2 },
+                new ServiceRequest { ServiceRequestID = 104, Title = "Park Clean-Up", DateSubmitted = DateTime.Now.AddDays(-8), Status = "In Progress", Description = "Scheduled clean-up for local park.", Priority = 4 },
                 new ServiceRequest { ServiceRequestID = 106, Title = "Road Sign Replacement", DateSubmitted = DateTime.Now.AddDays(-7), Status = "Completed", Description = "Replace damaged stop sign at intersection.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 107, Title = "Graffiti Removal", DateSubmitted = DateTime.Now.AddDays(-1), Status = "Pending", Description = "Graffiti on wall near subway station.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 108, Title = "Broken Bench Repair", DateSubmitted = DateTime.Now.AddDays(-12), Status = "Completed", Description = "Broken bench at the park needs repair.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 109, Title = "Sidewalk Crack Fix", DateSubmitted = DateTime.Now.AddDays(-4), Status = "In Progress", Description = "Fix cracks on sidewalk in front of library.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 110, Title = "Tree Trimming", DateSubmitted = DateTime.Now.AddDays(-6), Status = "Pending", Description = "Overgrown tree branches blocking the view of traffic signals.", Priority = 1 },
+                new ServiceRequest { ServiceRequestID = 107, Title = "Graffiti Removal", DateSubmitted = DateTime.Now.AddDays(-1), Status = "Pending", Description = "Graffiti on wall near subway station.", Priority = 5 },
+                new ServiceRequest { ServiceRequestID = 108, Title = "Broken Bench Repair", DateSubmitted = DateTime.Now.AddDays(-12), Status = "Completed", Description = "Broken bench at the park needs repair.", Priority = 3 },
+                new ServiceRequest { ServiceRequestID = 109, Title = "Sidewalk Crack Fix", DateSubmitted = DateTime.Now.AddDays(-4), Status = "In Progress", Description = "Fix cracks on sidewalk in front of library.", Priority = 4 },
+                new ServiceRequest { ServiceRequestID = 110, Title = "Tree Trimming", DateSubmitted = DateTime.Now.AddDays(-6), Status = "Pending", Description = "Overgrown tree branches blocking the view of traffic signals.", Priority = 2 },
                 new ServiceRequest { ServiceRequestID = 111, Title = "Speed Bump Installation", DateSubmitted = DateTime.Now.AddDays(-9), Status = "In Progress", Description = "Request to install speed bump on residential street.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 112, Title = "Playground Equipment Repair", DateSubmitted = DateTime.Now.AddDays(-15), Status = "Completed", Description = "Damaged swing set at local playground.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 113, Title = "Animal Control Assistance", DateSubmitted = DateTime.Now.AddDays(-2), Status = "In Progress", Description = "Stray dogs frequently seen near the school.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 114, Title = "Bus Shelter Repair", DateSubmitted = DateTime.Now.AddDays(-5), Status = "Pending", Description = "Damaged roof of bus shelter needs replacement.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 115, Title = "Street Sweeping", DateSubmitted = DateTime.Now.AddDays(-11), Status = "Completed", Description = "Regular street sweeping requested for downtown area.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 116, Title = "Fire Hydrant Painting", DateSubmitted = DateTime.Now.AddDays(-13), Status = "Completed", Description = "Paint faded fire hydrant in commercial district.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 117, Title = "Noise Complaint Resolution", DateSubmitted = DateTime.Now.AddDays(-8), Status = "In Progress", Description = "Resolve frequent loud noise from construction site.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 118, Title = "Drainage System Cleaning", DateSubmitted = DateTime.Now.AddDays(-3), Status = "Pending", Description = "Clear blocked drainage system on Oak Street.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 119, Title = "Fence Repair", DateSubmitted = DateTime.Now.AddDays(-14), Status = "Completed", Description = "Repair damaged fence in community garden.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 120, Title = "Bicycle Lane Painting", DateSubmitted = DateTime.Now.AddDays(-10), Status = "In Progress", Description = "Repaint faded markings on bike lane.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 121, Title = "Street Name Sign Update", DateSubmitted = DateTime.Now.AddDays(-6), Status = "Pending", Description = "Replace outdated street name signs in the area.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 122, Title = "Utility Pole Repair", DateSubmitted = DateTime.Now.AddDays(-5), Status = "In Progress", Description = "Leaning utility pole near school zone.", Priority = 1 },
+                new ServiceRequest { ServiceRequestID = 112, Title = "Playground Equipment Repair", DateSubmitted = DateTime.Now.AddDays(-15), Status = "Completed", Description = "Damaged swing set at local playground.", Priority = 5 },
+                new ServiceRequest { ServiceRequestID = 113, Title = "Animal Control Assistance", DateSubmitted = DateTime.Now.AddDays(-2), Status = "In Progress", Description = "Stray dogs frequently seen near the school.", Priority = 3 },
+                new ServiceRequest { ServiceRequestID = 114, Title = "Bus Shelter Repair", DateSubmitted = DateTime.Now.AddDays(-5), Status = "Pending", Description = "Damaged roof of bus shelter needs replacement.", Priority = 2 },
+                new ServiceRequest { ServiceRequestID = 115, Title = "Street Sweeping", DateSubmitted = DateTime.Now.AddDays(-11), Status = "Completed", Description = "Regular street sweeping requested for downtown area.", Priority = 3 },
+                new ServiceRequest { ServiceRequestID = 116, Title = "Fire Hydrant Painting", DateSubmitted = DateTime.Now.AddDays(-13), Status = "Completed", Description = "Paint faded fire hydrant in commercial district.", Priority = 2 },
+                new ServiceRequest { ServiceRequestID = 117, Title = "Noise Complaint Resolution", DateSubmitted = DateTime.Now.AddDays(-8), Status = "In Progress", Description = "Resolve frequent loud noise from construction site.", Priority = 4 },
+                new ServiceRequest { ServiceRequestID = 118, Title = "Drainage System Cleaning", DateSubmitted = DateTime.Now.AddDays(-3), Status = "Pending", Description = "Clear blocked drainage system on Oak Street.", Priority = 3 },
+                new ServiceRequest { ServiceRequestID = 119, Title = "Fence Repair", DateSubmitted = DateTime.Now.AddDays(-14), Status = "Completed", Description = "Repair damaged fence in community garden.", Priority = 3 },
+                new ServiceRequest { ServiceRequestID = 120, Title = "Bicycle Lane Painting", DateSubmitted = DateTime.Now.AddDays(-10), Status = "In Progress", Description = "Repaint faded markings on bike lane.", Priority = 3 },
+                new ServiceRequest { ServiceRequestID = 121, Title = "Street Name Sign Update", DateSubmitted = DateTime.Now.AddDays(-6), Status = "Pending", Description = "Replace outdated street name signs in the area.", Priority = 2 },
+                new ServiceRequest { ServiceRequestID = 122, Title = "Utility Pole Repair", DateSubmitted = DateTime.Now.AddDays(-5), Status = "In Progress", Description = "Leaning utility pole near school zone.", Priority = 3 },
                 new ServiceRequest { ServiceRequestID = 123, Title = "Bridge Inspection Request", DateSubmitted = DateTime.Now.AddDays(-7), Status = "Pending", Description = "Inspect bridge after recent heavy rainfall.", Priority = 1 },
-                new ServiceRequest { ServiceRequestID = 124, Title = "Mosquito Control Spraying", DateSubmitted = DateTime.Now.AddDays(-1), Status = "In Progress", Description = "Spraying requested due to increase in mosquito population.", Priority = 1 }
+                new ServiceRequest { ServiceRequestID = 124, Title = "Mosquito Control Spraying", DateSubmitted = DateTime.Now.AddDays(-1), Status = "In Progress", Description = "Spraying requested due to increase in mosquito population.", Priority = 4 }
             };
 
             foreach (var request in serviceRequests)
@@ -125,7 +116,7 @@ namespace POEPart1.ViewModels
                 serviceRequestGraph.AddEdge(request, null, 0);
             }
 
-            // Water Leak Repair depends on Pothole Fix with weight 5
+            // Water Leak Repair depends on Pothole Fix
             AddDependency(101, 102, 5);
 
             // Testing cyclical dependency prevention
@@ -170,29 +161,36 @@ namespace POEPart1.ViewModels
         /// <param name="weight"></param>
         public void AddDependency(int fromId, int toId, int weight)
         {
-            var from = serviceRequests.FirstOrDefault(sr => sr.ServiceRequestID == fromId);
-            var to = serviceRequests.FirstOrDefault(sr => sr.ServiceRequestID == toId);
+            // Find the service requests by their IDs
+            var fromRequest = serviceRequestBST.Search(fromId);
+            var toRequest = serviceRequestBST.Search(toId);
 
-            if (from == null || to == null)
+            if (fromRequest != null && toRequest != null)
             {
-                Console.WriteLine("Invalid service request ID(s) provided.");
-                return;
+                // Add the edge to the graph
+                serviceRequestGraph.AddEdge(fromRequest, toRequest, weight);
+
+                // Update the graph with the MST to prevent cycles
+                UpdateGraphWithMST();
             }
+        }
 
-            Console.WriteLine($"Attempting to add dependency from '{from.Title}' to '{to?.Title}' with weight {weight}.");
+        //-----------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Method to update the graph using the minimum spanning tree
+        /// </summary>
+        public void UpdateGraphWithMST()
+        {
+            // Get the minimum spanning tree
+            var mstEdges = serviceRequestGraph.GetMinimumSpanningTree();
 
-            serviceRequestGraph.AddEdge(from, to, weight);
-            if (serviceRequestGraph.HasCycle())
+            // Clear the current graph
+            serviceRequestGraph = new ServiceRequestGraph();
+
+            // Add the MST edges to the graph
+            foreach (var edge in mstEdges)
             {
-                // Remove the edge if it creates a cycle
-                serviceRequestGraph.RemoveEdge(from, to, weight);
-
-                // Handle the cycle gracefully, e.g., log a message or notify the user
-                Console.WriteLine($"Adding from: {from.Title} to: {to.Title}, this dependency creates a cycle. Dependency not added.");
-            }
-            else
-            {
-                Console.WriteLine($"Dependency from '{from.Title}' to '{to?.Title}' with weight {weight} added successfully.");
+                serviceRequestGraph.AddEdge(edge.from, edge.to, edge.weight);
             }
         }
 
@@ -233,6 +231,10 @@ namespace POEPart1.ViewModels
             OnPropertyChanged(nameof(MostUrgentRequestID));
             OnPropertyChanged(nameof(MostUrgentRequestTitle));
         }
+
+        //-----------------------------------------------------------------------------------------------//
+
+        // Filter Method
 
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
@@ -282,30 +284,9 @@ namespace POEPart1.ViewModels
 
         //-----------------------------------------------------------------------------------------------//
 
-        // Title Filtering/Sorting Methods
+        // Title Sorting Method
 
         //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to search service requests by title
-        /// </summary>
-        /// <param name="searchTerm"></param>
-        public void SearchRequests(string searchTerm)
-        {
-            var lowerSearchTerm = searchTerm?.ToLower();
-
-            var filteredRequests = serviceRequestBST.DisplayAllRequests()
-                .Where(r => string.IsNullOrEmpty(lowerSearchTerm) || r.Title.ToLower().Contains(lowerSearchTerm))
-                .ToList();
-
-            ServiceRequests.Clear();
-            foreach (var request in filteredRequests)
-            {
-                ServiceRequests.Add(request);
-            }
-        }
-
-        //-----------------------------------------------------------------------------------------------//
-
         /// <summary>
         /// Method to sort service requests by title
         /// </summary>
@@ -334,32 +315,7 @@ namespace POEPart1.ViewModels
 
         //-----------------------------------------------------------------------------------------------//
 
-        // Status Filtering/Sorting Methods
-
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to filter service requests by status
-        /// </summary>
-        /// <param name="status"></param>
-        public void FilterRequestsByStatus(string status)
-        {
-            var allRequests = serviceRequestBST.DisplayAllRequests();
-            if (allRequests == null)
-            {
-                // Handle the null case appropriately, e.g., log an error or return
-                return;
-            }
-
-            var filteredRequests = allRequests
-                .Where(r => r.Status == status || status == "-- Filter by Status --")
-                .ToList();
-
-            ServiceRequests.Clear();
-            foreach (var request in filteredRequests)
-            {
-                ServiceRequests.Add(request);
-            }
-        }
+        // Status Sorting Method
 
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
@@ -384,22 +340,7 @@ namespace POEPart1.ViewModels
 
         //-----------------------------------------------------------------------------------------------//
 
-        // Date Filtering/Sorting Methods
-
-        //-----------------------------------------------------------------------------------------------//
-        public void FilterRequestsByDate(DateTime? startDate, DateTime? endDate)
-        {
-            var filteredRequests = serviceRequestBST.DisplayAllRequests()
-                .Where(r => (!startDate.HasValue || r.DateSubmitted >= startDate.Value) &&
-                            (!endDate.HasValue || r.DateSubmitted <= endDate.Value))
-                .ToList();
-
-            ServiceRequests.Clear();
-            foreach (var request in filteredRequests)
-            {
-                ServiceRequests.Add(request);
-            }
-        }
+        // Date Sorting Method
 
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
@@ -418,6 +359,31 @@ namespace POEPart1.ViewModels
             {
                 ServiceRequests.Add(request);
             }
+            OnPropertyChanged(nameof(ServiceRequests));
+        }
+
+        //-----------------------------------------------------------------------------------------------//
+
+        // Status Sorting Method
+
+        //-----------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Method to sort service requests by status
+        /// </summary>
+        /// <param name="ascending"></param>
+        /// <param name="filteredRequests"></param>
+        public void SortRequestsByPriority(bool ascending, List<ServiceRequest> filteredRequests)
+        {
+            var sortedRequests = ascending
+         ? filteredRequests.OrderBy(r => r.Priority).ToList()
+         : filteredRequests.OrderByDescending(r => r.Priority).ToList();
+
+            ServiceRequests.Clear();
+            foreach (var request in sortedRequests)
+            {
+                ServiceRequests.Add(request);
+            }
+
             OnPropertyChanged(nameof(ServiceRequests));
         }
 

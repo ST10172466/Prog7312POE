@@ -39,6 +39,11 @@ namespace POEPart1.Views
         /// </summary>
         private bool dateSortCheck = true;
 
+        /// <summary>
+        /// Boolean to determine if the events sorted by priority are ascending or descending
+        /// </summary>
+        private bool prioritySortCheck = true;
+
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Constructor
@@ -229,7 +234,7 @@ namespace POEPart1.Views
 
         //-----------------------------------------------------------------------------------------------//
 
-        // Status Filtering/Sorting Methods
+        // Priority Filtering/Sorting Methods
 
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
@@ -238,20 +243,20 @@ namespace POEPart1.Views
         private void btnPrioritySort_Click(object sender, RoutedEventArgs e)
         {
             var filteredRequests = lstRequests.Items.Cast<ServiceRequest>().ToList();
-            viewModel.SortRequestsByStatus(statusSortCheck, filteredRequests);
-            if (this.statusSortCheck)
+            viewModel.SortRequestsByPriority(prioritySortCheck, filteredRequests);
+            if (this.prioritySortCheck)
             {
                 // Sorts the events by title in ascending order
                 HideSortArrows();
                 priorityAscArrow.Visibility = Visibility.Visible;
-                this.statusSortCheck = false;
+                this.prioritySortCheck = false;
             }
             else
             {
                 // Sorts the events by title in descending order
                 HideSortArrows();
                 priorityDescArrow.Visibility = Visibility.Visible;
-                this.statusSortCheck = true;
+                this.prioritySortCheck = true;
             }
         }
 
@@ -281,9 +286,58 @@ namespace POEPart1.Views
                 txtRequestStatus.Text = selectedRequest.Status;
                 txtRequestDate.Text = selectedRequest.DateSubmitted.ToString("MMMM dd, yyyy");
                 txtRequestDescription.Text = selectedRequest.Description;
+
+                // Displaying priority in a more intuitive way
+                switch (selectedRequest.Priority)
+                {
+                    case 1:
+                    case 2:
+                        txtRequestPriority.Text = "High";
+                        break;
+                    case 3:
+                    case 4:
+                        txtRequestPriority.Text = "Medium";
+                        break;
+                    case 5:
+                        txtRequestPriority.Text = "Low";
+                        break;
+                    default:
+                        txtRequestPriority.Text = "Unknown"; // In case of an invalid priority
+                        break;
+                }
             }
         }
 
+        private void lstDependencies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstDependencies.SelectedItem is ServiceRequest selectedRequest)
+            {
+                txtRequestID.Text = selectedRequest.ServiceRequestID.ToString();
+                txtRequestTitle.Text = selectedRequest.Title;
+                txtRequestStatus.Text = selectedRequest.Status;
+                txtRequestDate.Text = selectedRequest.DateSubmitted.ToString("MMMM dd, yyyy");
+                txtRequestDescription.Text = selectedRequest.Description;
+
+                // Displaying priority in a more intuitive way
+                switch (selectedRequest.Priority)
+                {
+                    case 1:
+                    case 2:
+                        txtRequestPriority.Text = "High";
+                        break;
+                    case 3:
+                    case 4:
+                        txtRequestPriority.Text = "Medium";
+                        break;
+                    case 5:
+                        txtRequestPriority.Text = "Low";
+                        break;
+                    default:
+                        txtRequestPriority.Text = "Unknown"; // In case of an invalid priority
+                        break;
+                }
+            }
+        }
         //-----------------------------------------------------------------------------------------------//
 
         // Format Methods

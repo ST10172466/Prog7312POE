@@ -112,6 +112,7 @@
     <Compile Include="ReportViewWindow.xaml.cs">
       <DependentUpon>ReportViewWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\ServiceRequestViewModel.cs" />
     <Compile Include="Views\ServiceRequestWindow.xaml.cs">
       <DependentUpon>ServiceRequestWindow.xaml</DependentUpon>

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POEPart1"
+        xmlns:vm="clr-namespace:POEPart1.ViewModels"
         mc:Ignorable="d"
         Title="EventsWindow"  Height="1080" Width="1920" WindowState="Maximized">
     <Grid>
@@ -99,7 +100,7 @@
                 </Button>
             </StackPanel>
 
-            <TextBox Name="txtSearch" TextChanged="txtSearch_TextChanged" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Height="20"/>
+            <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged" Grid.Column="1" Grid.ColumnSpan="3" Margin="10" Height="20"/>
 
             <!-- Category Filter -->
             <ComboBox Name="cbCategoryFilter" Grid.Row="1" SelectedIndex="0" Height="25" Width="150" HorizontalContentAlignment="Center" SelectionChanged="cbCategoryFilter_SelectionChanged" Grid.ColumnSpan="3">
@@ -121,7 +122,7 @@
                 <TextBlock Text="Events" FontWeight="Bold" FontSize="20" Margin="10" TextAlignment="Center"/>
                 <Border Height="1" Background="Black" Margin="0,5,0,5" />
             </StackPanel>
-            
+
             <!-- Title Sort -->
             <Button Name="btnTitleSort" Width="100" Height="40" Grid.Row="4" Grid.Column="1"  Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" Click="btnTitleSort_Click">
                 <StackPanel Orientation="Horizontal">
@@ -151,7 +152,7 @@
         </Grid>
 
         <!-- Events List Box -->
-        <ListBox Name="lstEvents" DisplayMemberPath="Title" SelectionChanged="lstEvents_SelectionChanged" Grid.Row="4" BorderThickness="0,0,1,0" />
+        <ListBox Name="lstEvents" ItemsSource="{Binding EventsList}" DisplayMemberPath="Title" SelectionChanged="lstEvents_SelectionChanged" Grid.Row="4" BorderThickness="0,0,1,0" Margin="10,0,0,0" />
 
 
         <Grid Grid.Row="3" Grid.Column="1">
@@ -163,11 +164,9 @@
             <TextBlock Text="Recommended Events:" FontWeight="SemiBold" FontSize="16" Margin="10"/>
 
             <!-- Recommended Events List Box -->
-            <ScrollViewer Grid.Row="1" >
-                <ListBox Name="lstRecommendations" DisplayMemberPath="Title" SelectionChanged="lstRecommendations_SelectionChanged" BorderThickness="1,0,0,0" MaxHeight="100" />
-            </ScrollViewer>
+            <ListBox Name="lstRecommendations" ItemsSource="{Binding RecommendationsList}" DisplayMemberPath="Title" SelectionChanged="lstRecommendations_SelectionChanged" BorderThickness="1,0,0,0" MaxHeight="100"  Grid.Row="1"/>
         </Grid>
-        
+
 
         <!-- View Event -->
         <Grid Grid.Row="4" Margin="10" Grid.Column="1">
@@ -175,11 +174,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                
+
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -187,7 +182,11 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                
+
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -203,22 +202,22 @@
 
             <!-- Title Display -->
             <TextBlock Text="Title:" FontWeight="Bold" Grid.Row="2" />
-            <TextBlock Name="txtEventTitle" Grid.Row="3" />
+            <TextBlock Name="txtEventTitle" Text="{Binding SelectedEvent.Title}" Grid.Row="3" />
 
             <!-- Category Display -->
             <TextBlock Text="Category:" FontWeight="Bold" Margin="0,10,0,0" Grid.Row="4"/>
-            <TextBlock Name="txtEventCategory" Grid.Row="5"/>
+            <TextBlock Name="txtEventCategory" Text="{Binding SelectedEvent.Category}" Grid.Row="5"/>
 
             <!-- Description Display -->
             <TextBlock Text="Description:" FontWeight="Bold" Margin="0,10,0,0" Grid.Row="6"/>
-            <TextBlock Name="txtEventDescription" TextWrapping="Wrap" Height="40" Grid.Row="7"/>
+            <TextBlock Name="txtEventDescription" Text="{Binding SelectedEvent.Description}" TextWrapping="Wrap" Height="40" Grid.Row="7"/>
 
             <!-- Date Display -->
             <TextBlock Text="Date:" FontWeight="Bold" Margin="0,10,0,0" Grid.Row="8"/>
-            <TextBlock Name="txtEventDate" Grid.Row="9"/>
+            <TextBlock Name="txtEventDate" Text="{Binding SelectedEvent.Date, StringFormat='{}{0:MMMM dd, yyyy}'}" Grid.Row="9"/>
 
             <!-- Image Preview -->
-            <Image Name="imgAttachment" Stretch="Uniform" Visibility="Collapsed" Grid.Column="1" Grid.RowSpan="13" MaxHeight="500" Margin="50"/>
+            <Image Name="imgAttachment" Source="{Binding SelectedEvent.Image}"  Stretch="Uniform" Grid.Column="1" Grid.RowSpan="13" MaxHeight="500" Margin="50"/>
         </Grid>
     </Grid>
 </Window>

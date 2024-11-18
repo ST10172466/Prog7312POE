@@ -1,19 +1,19 @@
 ﻿using POEPart1.Models;
+using POEPart1.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+
 
 namespace POEPart1
 {
     /// <summary>
     /// Interaction logic for EventsWindow.xaml
     /// </summary>
-    public partial class EventsWindow : System.Windows.Window
+    public partial class EventsWindow : Window
     {
         //-----------------------------------------------------------------------------------------------//
         // Stacks to manage event related data structures
@@ -59,6 +59,8 @@ namespace POEPart1
         /// </summary>
         private Event currentEvent;
 
+        private EventViewModel viewModel;
+
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Constructor
@@ -66,7 +68,9 @@ namespace POEPart1
         public EventsWindow()
         {
             InitializeComponent();
-            PopulateEventDictionary();
+            viewModel = new EventViewModel();
+            DataContext = viewModel;
+            //PopulateEventDictionary();
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -136,6 +140,9 @@ namespace POEPart1
             DateTime? startDate = dpStart.SelectedDate;
             DateTime? endDate = dpEnd.SelectedDate;
 
+            viewModel.FilterEvents(searchTerm, selectedCategory, startDate, endDate);
+
+            /*
             var filteredEvents = eventDictionary.SelectMany(entry => entry.Value)
                 .Where(evt => evt.Title.ToLower().Contains(searchTerm)
                               && (selectedCategory.Equals("-- Filter by Category --") || evt.Category == selectedCategory)
@@ -151,7 +158,7 @@ namespace POEPart1
             else
             {
                 lstEvents.ItemsSource = new List<Event> { new Event { Title = "No events found." } };
-            }
+            }*/
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -164,6 +171,7 @@ namespace POEPart1
         /// </summary>
         private void btnTitleSort_Click(object sender, RoutedEventArgs e)
         {
+            /*
             // Use the current items in the listbox to sort
             var currentEvents = lstEvents.ItemsSource as List<Event>;
 
@@ -190,7 +198,13 @@ namespace POEPart1
 
                 // Update listbox
                 lstEvents.ItemsSource = sortedEvents;
-            }
+            }*/
+
+            viewModel.SortEventsByTitle();
+            HideSortArrows();
+            titleAscArrow.Visibility = viewModel.titleSortCheck ? Visibility.Visible : Visibility.Collapsed;
+            titleDescArrow.Visibility = !viewModel.titleSortCheck ? Visibility.Visible : Visibility.Collapsed;
+
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -226,6 +240,7 @@ namespace POEPart1
                     DateTime? startDate = dpStart.SelectedDate;
                     DateTime? endDate = dpEnd.SelectedDate;
 
+                    /*
                     if (startDate.HasValue)
                     {
                         filteredEvents = filteredEvents.Where(evt => evt.Date >= startDate.Value).ToList();
@@ -238,6 +253,9 @@ namespace POEPart1
 
                     // Apply category filter on top of the search results
                     CategoryFilterEvents(selectedCategory, filteredEvents);
+                    */
+                    viewModel.FilterEvents(searchTerm, selectedCategory, startDate, endDate);
+
                 }
             }
         }
@@ -284,6 +302,7 @@ namespace POEPart1
         /// </summary>
         private void btnCategorySort_Click(object sender, RoutedEventArgs e)
         {
+            /*
             // Use the current items in the listbox to sort
             var currentEvents = lstEvents.ItemsSource as List<Event>;
 
@@ -310,7 +329,12 @@ namespace POEPart1
 
                 // Update listbox
                 lstEvents.ItemsSource = sortedEvents;
-            }
+            }*/
+
+            viewModel.SortEventsByCategory();
+            HideSortArrows();
+            catAscArrow.Visibility = viewModel.categorySortCheck ? Visibility.Visible : Visibility.Collapsed;
+            catDescArrow.Visibility = !viewModel.categorySortCheck ? Visibility.Visible : Visibility.Collapsed;
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -369,6 +393,8 @@ namespace POEPart1
             DateTime? startDate = dpStart.SelectedDate;
             DateTime? endDate = dpEnd.SelectedDate;
 
+            viewModel.FilterEvents(searchTerm, selectedCategory, startDate, endDate);
+/*
             // Start with all events
             var filteredEvents = eventDictionary.SelectMany(entry => entry.Value)
                                                 .Where(evt =>
@@ -395,7 +421,7 @@ namespace POEPart1
             if (!filteredEvents.Any())
             {
                 lstEvents.ItemsSource = new List<Event> { new Event { Title = "No events found." } };
-            }
+            }*/
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -404,6 +430,7 @@ namespace POEPart1
         /// </summary>
         private void btnDateSort_Click(object sender, RoutedEventArgs e)
         {
+            /*
             // Use the current items in the listbox to sort
             var currentEvents = lstEvents.ItemsSource as List<Event>;
 
@@ -428,8 +455,11 @@ namespace POEPart1
 
                 // Update listbox
                 lstEvents.ItemsSource = sortedEvents;
-            }
-
+            }*/
+            viewModel.SortEventsByDate();
+            HideSortArrows();
+            dateAscArrow.Visibility = viewModel.dateSortCheck ? Visibility.Visible : Visibility.Collapsed;
+            dateDescArrow.Visibility = !viewModel.dateSortCheck ? Visibility.Visible : Visibility.Collapsed;
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -448,19 +478,28 @@ namespace POEPart1
             {
                 if (selectedEvent.Title != "No events found.")
                 {
-                    ViewEvent(selectedEvent);
+                    //ViewEvent(selectedEvent);
+                    viewModel.ViewEvent(selectedEvent);
+
                 }
             }
         }
 
+        /// <summary>
+        /// Method to handle recommendations selection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstRecommendations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstRecommendations.SelectedItem is Event selectedEvent)
             {
-                ViewEvent(selectedEvent);
+                //ViewEvent(selectedEvent);
+                viewModel.ViewEvent(selectedEvent);
             }
         }
 
+        /*
         //-----------------------------------------------------------------------------------------------//
         /// <summary>
         /// Method to handle displaying the selected event and managing the undo and redo stacks
@@ -539,7 +578,7 @@ namespace POEPart1
                 lstRecommendations.ItemsSource = recommendedEvents;
             }
         }
-
+        */
         //-----------------------------------------------------------------------------------------------//
 
         // Undo and Redo Methods
@@ -552,6 +591,8 @@ namespace POEPart1
         /// <param name="e"></param>
         private void btnUndo_Click(object sender, RoutedEventArgs e)
         {
+            viewModel.Undo();
+            /*
             if (undoStack.Count > 0)
             {
                 // Move the current event to the redo stack
@@ -566,7 +607,7 @@ namespace POEPart1
             else
             {
                 MessageBox.Show("No events to undo.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            }*/
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -577,6 +618,9 @@ namespace POEPart1
         /// <param name="e"></param>
         private void btnRedo_Click(object sender, RoutedEventArgs e)
         {
+            viewModel.Redo();
+
+            /*
             if (redoStack.Count > 0)
             {
                 // Move the current event to the undo stack
@@ -591,7 +635,7 @@ namespace POEPart1
             else
             {
                 MessageBox.Show("No events to redo.", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            }*/
         }
 
         //-----------------------------------------------------------------------------------------------//
@@ -629,22 +673,6 @@ namespace POEPart1
 
             dateAscArrow.Visibility = Visibility.Collapsed;
             dateDescArrow.Visibility = Visibility.Collapsed;
-        }
-
-        //-----------------------------------------------------------------------------------------------//
-        /// <summary>
-        /// Method to populate the ListBox with all events
-        /// </summary>
-        private void PopulateListBoxWithAllEvents()
-        {
-            var allEvents = new List<Event>();
-
-            foreach (var dateEntry in eventDictionary)
-            {
-                allEvents.AddRange(dateEntry.Value);
-            }
-
-            lstEvents.ItemsSource = allEvents;
         }
 
         //-----------------------------------------------------------------------------------------------//
